@@ -15,6 +15,36 @@ function preload() {
 
 function setup(){
     var canvas = createCanvas(1200,400);
+
+    var num=32;
+    //console.log(num);
+
+    var string="Aarush";
+   // console.log(string);
+
+    var bool=true;
+    //console.log(bool);
+
+    var a1;
+   // console.log(a1)
+
+    var a2=null;
+    //console.log(a2);
+
+    a2="slingshot is in short called 'Sling'";
+    //console.log(a2);
+    
+    var arr=[12, 90, 70, 30];
+    //console.log(arr[0])
+
+    var arr2 = [a1, a2, bool, string, arr]
+    //console.log(arr2)
+
+    var arr3 = [[[2, 3], 2], [3, 4]];
+   // console.log(arr3[0][0][0])
+
+   var gameState = "onSling"
+
     engine = Engine.create();
     world = engine.world;
 
@@ -69,16 +99,23 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    
+    if(gameState==="onSling"){ 
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }
+   
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState="Launch";
 }
 
 function keyPressed(){
     if(keyCode === 32){
+        bird.path=[];
         slingshot.attach(bird.body);
+        gameState="onSling";
     }
 }
